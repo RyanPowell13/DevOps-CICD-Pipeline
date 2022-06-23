@@ -1,0 +1,17 @@
+#Pulls latest jenkins image from DockerHub
+FROM jenkins/jenkins
+
+#Disables Setup Wizzard
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+
+#Links casc.yaml file to the config env variable
+ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc.yaml
+
+#Copies plugins.txt into the container
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
+#Installs plugins from plugins.txt on the Jenkins server
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+#Copies casc.yaml into the container
+COPY casc.yaml /var/jenkins_home/casc.yaml

@@ -1,0 +1,21 @@
+# Configuration as code reference located at http://localhost:8080/configuration-as-code/reference
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}               #Creates local admin account, variables are set at runtime
+         password: ${JENKINS_ADMIN_PASSWORD}
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:admin"            #Uses Matrix Authorization Strategy to set account permissions for admin and authenticated users
+        - "Overall/Read:authenticated"
+security:
+  queueItemAuthenticator:
+    authenticators:                            #Ensure jobs are ran using the same user that configured or triggered it with Authorize Project plugin
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+unclassified:
+  location:
+    url: http://localhost:8080/                 #change localhost to server ip hosting jenkins
