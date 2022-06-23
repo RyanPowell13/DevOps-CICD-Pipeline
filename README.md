@@ -9,7 +9,7 @@ A simple DevOps Project that uses Vagrant to build a VM and configure a Jenkins 
 
 # How to Use
 
-1. Close this repo and cd into the root directory
+1. Clone this repo and cd into the root directory
 2. Run the following command: `vagrant up`
 3. Open a browser and navigate to http://localhost:8080
 
